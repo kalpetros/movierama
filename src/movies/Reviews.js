@@ -24,7 +24,7 @@ export const Reviews = (props) => {
       });
   };
 
-  const list = data.map((review, index) => {
+  const list = data.slice(0, 2).map((review, index) => {
     const author = review.author;
     const content = review.content;
 
