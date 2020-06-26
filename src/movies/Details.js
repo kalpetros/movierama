@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+
 import { Overview } from './Overview';
-import { SimilarMovies } from './SimilarMovies';
 import { Reviews } from './Reviews';
+import { SimilarMovies } from './SimilarMovies';
 
 export const Details = (props) => {
   const [view, setView] = useState('overview');

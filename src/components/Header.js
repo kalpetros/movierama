@@ -1,4 +1,5 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useContext } from 'react';
+
 import { MoviesContext } from '../store/MoviesContext';
 
 export const Header = () => {

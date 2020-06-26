@@ -1,4 +1,6 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
+
 import { ConfigurationContext } from '../store/ConfigurationContext';
 
 export const SimilarMovies = (props) => {

@@ -1,8 +1,9 @@
-import React, { useState, useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import PropTypes from 'prop-types';
+
 import { ConfigurationContext } from '../store/ConfigurationContext';
-import { GenreContext } from '../store/GenreContext';
 import { Details } from './Details';
+import { GenreContext } from '../store/GenreContext';
 
 export const Movie = (props) => {
   const [isSelected, setIsSelected] = useState(false);
@@ -105,7 +106,7 @@ export const Movie = (props) => {
           </div>
         </div>
       </div>
-      <Details id={data.id} isSelected={isSelected} />
+      <Details />
     </div>
   );
 };

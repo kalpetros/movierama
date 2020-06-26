@@ -1,10 +1,11 @@
 import React, {
   createContext,
-  useState,
-  useEffect,
   useContext,
+  useEffect,
   useRef,
+  useState,
 } from 'react';
+
 import { ConfigurationContext } from './ConfigurationContext';
 
 export const MoviesContext = createContext([]);
