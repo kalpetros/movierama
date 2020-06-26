@@ -41,6 +41,10 @@ export const MoviesStateProvider = ({ children }) => {
   useEffect(() => {
     if (query.length > 0) {
       setMovies([]);
+    } else {
+      if (movies.length > 0) {
+        setMovies([]);
+      }
     }
   }, [query]);
 
