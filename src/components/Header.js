@@ -2,18 +2,16 @@ import React, { useState, useEffect, useContext } from 'react';
 import { MoviesContext } from '../store/MoviesContext';
 
 export const Header = () => {
-  const [value, setValue] = useState('');
-  const { dispatch } = useContext(MoviesContext);
-
-  useEffect(() => {
-    if (value !== '') {
-      dispatch({ type: 'GET', query: value });
-    }
-  }, [value]);
+  const { query, setQuery } = useContext(MoviesContext);
 
   const handleChange = (e) => {
-    setValue(e.currentTarget.value);
+    setQuery(e.currentTarget.value);
   };
+
+  let title = 'In Theaters';
+  if (query.length > 0) {
+    title = `Movies "${query}"`;
+  }
 
   return (
     <header className="header">
@@ -25,7 +23,7 @@ export const Header = () => {
           <div>
             <input
               type="text"
-              value={value}
+              value={query}
               className="input"
               placeholder="Type here to search for your favorite movie..."
               onChange={handleChange}
@@ -35,7 +33,7 @@ export const Header = () => {
       </div>
       <div className="header__title">
         <div>
-          <h1>In Theaters</h1>
+          <h1>{title}</h1>
         </div>
       </div>
     </header>

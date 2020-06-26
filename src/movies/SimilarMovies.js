@@ -42,7 +42,7 @@ export const SimilarMovies = (props) => {
     const imageUrl = buildImageUrl(movie.poster_path, 2);
 
     return (
-      <a className="movie__details__image">
+      <a key={`similar-movie-${index}`} className="movie__details__image">
         <img src={imageUrl} alt={movie.title} />
       </a>
     );

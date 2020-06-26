@@ -1,6 +1,6 @@
 import React, { createContext, useState, useEffect } from 'react';
 
-export const GenreContext = createContext({});
+export const GenreContext = createContext([]);
 
 export const GenreStateProvider = ({ children }) => {
   const [state, setState] = useState([]);

@@ -2,9 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 export const Layout = ({ children }) => {
-  return <div className="layout">{children}</div>;
+  return (
+    <main className="layout">
+      <section>{children}</section>
+    </main>
+  );
 };
 
 Layout.propTypes = {
-  children: PropTypes.object.isRequired,
+  children: PropTypes.node.isRequired,
 };

@@ -1,5 +1,6 @@
 import 'normalize.css';
 import './styles/base.scss';
+
 import React from 'react';
 import ReactDOM from 'react-dom';
 
@@ -13,8 +14,8 @@ import { MoviesStateProvider } from './store/MoviesContext';
 const App = () => {
   return (
     <ConfigurationStateProvider>
-      <MoviesStateProvider>
-        <GenreStateProvider>
+      <GenreStateProvider>
+        <MoviesStateProvider>
           <nav className="nav">
             <div>
               <a href="/">MovieRama</a>
@@ -22,14 +23,10 @@ const App = () => {
           </nav>
           <Header />
           <Layout>
-            <main>
-              <section>
-                <Movies />
-              </section>
-            </main>
+            <Movies />
           </Layout>
-        </GenreStateProvider>
-      </MoviesStateProvider>
+        </MoviesStateProvider>
+      </GenreStateProvider>
     </ConfigurationStateProvider>
   );
 };
