@@ -1,0 +1,19 @@
+@use 'theme';
+
+.nav {
+  background-color: theme.$base-color;
+  padding: 1rem 2rem;
+  position: sticky;
+  top: 0;
+  z-index: 9999;
+  > div {
+    max-width: 1280px;
+    margin: auto;
+    > a {
+      color: theme.$white;
+      text-transform: uppercase;
+      font-weight: 600;
+      text-decoration: none;
+    }
+  }
+}
