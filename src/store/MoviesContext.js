@@ -1,4 +1,10 @@
-import React, { createContext, useState, useEffect, useContext } from 'react';
+import React, {
+  createContext,
+  useState,
+  useEffect,
+  useContext,
+  useRef,
+} from 'react';
 import { ConfigurationContext } from './ConfigurationContext';
 
 export const MoviesContext = createContext([]);
@@ -9,6 +15,8 @@ export const MoviesStateProvider = ({ children }) => {
   const [page, setPage] = useState(1);
   const [query, setQuery] = useState('');
   const { state: configuration } = useContext(ConfigurationContext);
+  const totalPagesRef = useRef(totalPages);
+  const pageRef = useRef(page);
 
   const apiKey = 'bc50218d91157b1ba4f142ef7baaa6a0';
   const baseEndpoint = 'https://api.themoviedb.org/3/';
@@ -23,9 +31,17 @@ export const MoviesStateProvider = ({ children }) => {
     };
   }, []);
 
+  useEffect(() => {
+    if (Object.keys(configuration).length > 0) {
+      fetchMovies();
+    }
+  }, [configuration]);
+
   // Perform a cleanup after each new query
   useEffect(() => {
-    setMovies([]);
+    if (query.length > 0) {
+      setMovies([]);
+    }
   }, [query]);
 
   useEffect(() => {
@@ -34,7 +50,7 @@ export const MoviesStateProvider = ({ children }) => {
         fetchMovies();
       }
     }
-  }, [movies, configuration]);
+  }, [movies]);
 
   useEffect(() => {
     if (totalPages > 0) {
@@ -48,8 +64,10 @@ export const MoviesStateProvider = ({ children }) => {
     const scrollY = window.scrollY;
 
     if (innerHeight + scrollY === offsetHeight) {
-      // TODO: Check when it ends
-      setPage((p) => p + 1);
+      if (pageRef.current < totalPagesRef.current) {
+        pageRef.current = pageRef.current + 1;
+        setPage(pageRef.current);
+      }
     }
   };
 
@@ -65,6 +83,7 @@ export const MoviesStateProvider = ({ children }) => {
     })
       .then((response) => response.json())
       .then((data) => {
+        totalPagesRef.current = data.total_pages;
         setTotalPages(data.total_pages);
         setMovies([...movies, ...data.results]);
       })
