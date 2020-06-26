@@ -16,7 +16,10 @@ export const ConfigurationStateProvider = ({ children }) => {
     fetch(endpoint, {
       method: 'GET',
     })
-      .then((response) => response.json())
+      .then((response) => {
+        if (response.status !== 200) throw new Error(response.status);
+        return response.json();
+      })
       .then((data) => {
         setState(data.images);
       })

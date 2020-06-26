@@ -106,7 +106,7 @@ export const Movie = (props) => {
           </div>
         </div>
       </div>
-      <Details />
+      <Details id={data.id} isSelected={isSelected} />
     </div>
   );
 };
