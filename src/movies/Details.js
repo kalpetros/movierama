@@ -19,12 +19,14 @@ export const Details = (props) => {
     setView(id);
   };
 
-  if (view === 'overview') {
-    currentView = <Overview id={id} />;
-  } else if (view === 'reviews') {
-    currentView = <Reviews id={id} />;
-  } else if (view === 'similar') {
-    currentView = <SimilarMovies id={id} />;
+  if (isSelected) {
+    if (view === 'overview') {
+      currentView = <Overview id={id} />;
+    } else if (view === 'reviews') {
+      currentView = <Reviews id={id} />;
+    } else if (view === 'similar') {
+      currentView = <SimilarMovies id={id} />;
+    }
   }
 
   return (
