@@ -43,3 +43,11 @@ export const Reviews = (props) => {
     </div>
   );
 };
+
+Reviews.defaultProps = {
+  id: 1,
+};
+
+Reviews.propTypes = {
+  id: PropTypes.number.isRequired,
+};

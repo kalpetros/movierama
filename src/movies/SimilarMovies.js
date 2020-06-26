@@ -61,3 +61,11 @@ export const SimilarMovies = (props) => {
     </div>
   );
 };
+
+SimilarMovies.defaultProps = {
+  id: 1,
+};
+
+SimilarMovies.propTypes = {
+  id: PropTypes.number.isRequired,
+};

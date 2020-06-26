@@ -109,6 +109,7 @@ export const Movie = (props) => {
     </div>
   );
 };
+
 Movie.propTypes = {
   data: PropTypes.object.isRequired,
 };

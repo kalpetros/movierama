@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 
 export const Overview = (props) => {
   const [data, setData] = useState([]);
-
   const { id: id } = props;
 
   useEffect(() => {
@@ -62,4 +61,12 @@ export const Overview = (props) => {
       <small className="font-bold text-uppercase">{countriesText}</small>
     </div>
   );
+};
+
+Overview.defaultProps = {
+  id: 1,
+};
+
+Overview.propTypes = {
+  id: PropTypes.number.isRequired,
 };

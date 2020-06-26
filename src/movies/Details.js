@@ -60,6 +60,13 @@ export const Details = (props) => {
     </div>
   );
 };
+
+Details.defaultProps = {
+  id: 1,
+  isSelected: false,
+};
+
 Details.propTypes = {
   id: PropTypes.number.isRequired,
+  isSelected: PropTypes.bool.isRequired,
 };
