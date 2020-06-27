@@ -18,18 +18,22 @@ export const Movie = (props) => {
     element.scrollIntoView({ behavior: 'smooth' });
   };
 
+  const posterUrl = buildImageUrl(configuration, data.poster_path, 2);
+
+  let legend = <p>{overview}</p>;
   let style = {};
   let overview = data.overview.length === 0 ? 'N/A' : data.overview;
+  let year = 'N/A';
+  let genresText = null;
 
   if (data.overview.length > 200) {
     overview = `${data.overview.substring(0, 200)}...`;
   }
 
-  let legend = <p>{overview}</p>;
-  const posterUrl = buildImageUrl(configuration, data.poster_path, 2);
-  const year = new Date(data.release_date).getFullYear();
+  if (data.release_date.length > 0) {
+    year = new Date(data.release_date).getFullYear();
+  }
 
-  let genresText = null;
   let genreList = data.genre_ids.map((id) => {
     const label = genres.find((g) => g.id === id);
     return label.name;
@@ -41,12 +45,16 @@ export const Movie = (props) => {
 
   if (isSelected) {
     const popularity = Math.round(data.popularity, 0);
-    const releaseDate = new Date(data.release_date);
-    const date = releaseDate.getDate();
-    const month = releaseDate.getMonth() + 1;
-    const year = releaseDate.getFullYear();
-    const dateString = `${date}/${month}/${year}`;
     const backgroundImage = buildImageUrl(configuration, data.poster_path, 5);
+    let dateString = 'N/A';
+
+    if (data.release_date.length > 0) {
+      const releaseDate = new Date(data.release_date);
+      const date = releaseDate.getDate();
+      const month = releaseDate.getMonth() + 1;
+      const year = releaseDate.getFullYear();
+      dateString = `${date}/${month}/${year}`;
+    }
 
     legend = (
       <>

@@ -39,20 +39,15 @@ export const Overview = (props) => {
     return genre.name;
   });
   const genresText = genres.join(', ');
-
   const producers = data.production_companies.map((company, index) => {
     return company.name;
   });
-
   const producersText = producers.length > 0 ? producers.join(', ') : 'N/A';
-
   const countries = data.production_countries.map((country, index) => {
     return country.name;
   });
-
   const countriesText = countries.length > 0 ? countries.join(', ') : 'N/A';
-
-  const runtime = `${data.runtime} minutes`;
+  const runtime = data.runtime !== null ? `${data.runtime} minutes` : 'N/A';
 
   return (
     <div className="movie__details__meta">
