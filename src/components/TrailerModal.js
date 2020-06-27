@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { createPortal } from 'react-dom';
 import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faYoutube } from '@fortawesome/free-brands-svg-icons';
 
 export const TrailerModal = (props) => {
   const [visible, setVisible] = useState(false);
@@ -34,7 +35,7 @@ export const TrailerModal = (props) => {
   return (
     <div>
       <FontAwesomeIcon
-        icon={['fab', 'youtube']}
+        icon={faYoutube}
         size="2x"
         color="red"
         className="button-icon"
