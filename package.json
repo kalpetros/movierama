@@ -9,7 +9,7 @@
     "build": "parcel build src/index.html",
     "develop": "parcel src/index.html",
     "format": "prettier \"**/*.{js, html}\" --write",
-    "lint": "eslint \"**/*.{js,jsx}\" --quiet",
+    "lint": "eslint \"**/*.js\"",
     "test": "jest"
   },
   "devDependencies": {
