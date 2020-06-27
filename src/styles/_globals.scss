@@ -48,3 +48,22 @@ p {
 .text-uppercase {
   text-transform: uppercase;
 }
+
+.modal-wrapper {
+  background-color: rgba(0, 0, 0, 0.7);
+  position: fixed;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  z-index: 9999;
+  .modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+}
+
+.button-icon {
+  cursor: pointer;
+}

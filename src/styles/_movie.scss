@@ -75,6 +75,11 @@
     &__meta {
       overflow: auto;
     }
+    &__trailers {
+      > div {
+        margin-bottom: 2rem;
+      }
+    }
     &__list {
       display: grid;
       grid-template-columns: repeat(6, minmax(0, 1fr));

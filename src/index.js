@@ -11,6 +11,11 @@ import { Layout } from './components/Layout';
 import { Movies } from './movies/main';
 import { MoviesStateProvider } from './store/MoviesContext';
 
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { fab } from '@fortawesome/free-brands-svg-icons';
+
+library.add(fab);
+
 const App = () => {
   return (
     <ConfigurationStateProvider>
