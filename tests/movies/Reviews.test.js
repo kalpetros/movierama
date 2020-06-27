@@ -1,11 +1,19 @@
 import React from 'react';
-import { shallow, configure } from 'enzyme';
+import { configure, shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 
 configure({ adapter: new Adapter() });
 
-import { SimilarMovies } from '../../src/movies/SimilarMovies';
+import { Reviews } from '../../src/movies/Reviews';
 
-test('test', () => {
-  const wrapper = shallow(<SimilarMovies />);
+describe('<Reviews />', () => {
+  let wrapper;
+
+  beforeEach(() => {
+    wrapper = shallow(<Reviews />);
+  });
+
+  it('should match the snapshot', () => {
+    expect(wrapper.html()).toMatchSnapshot();
+  });
 });
