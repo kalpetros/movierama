@@ -13,18 +13,7 @@ describe('<SimilarMovies />', () => {
     wrapper = shallow(<SimilarMovies />);
   });
 
-  it('has 2 elements', () => {
-    const className = wrapper.find('.movie__details__meta');
-    expect(className.props().children.length).toBe(2);
-  });
-
-  it('has the correct header text', () => {
-    const text = wrapper.find('h2').text();
-    expect(text).toBe('Similar Movies');
-  });
-
-  it('has the correct content text', () => {
-    const text = wrapper.find('p').text();
-    expect(text).toBe('We could not find any similar movies.');
+  it('should match the snapshot', () => {
+    expect(wrapper.html()).toMatchSnapshot();
   });
 });
