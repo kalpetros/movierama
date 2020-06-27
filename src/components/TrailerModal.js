@@ -3,7 +3,7 @@ import { createPortal } from 'react-dom';
 import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-export const Modal = (props) => {
+export const TrailerModal = (props) => {
   const [visible, setVisible] = useState(false);
   const { id: id } = props;
 
@@ -45,6 +45,6 @@ export const Modal = (props) => {
   );
 };
 
-Modal.propTypes = {
+TrailerModal.propTypes = {
   id: PropTypes.string.isRequired,
 };
