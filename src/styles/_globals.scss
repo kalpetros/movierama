@@ -35,6 +35,9 @@ p {
   &:focus {
     outline: none;
   }
+  @media (max-width: 600px) {
+    padding: 0;
+  }
 }
 
 .text-right {

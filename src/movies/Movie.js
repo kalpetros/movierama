@@ -19,18 +19,23 @@ export const Movie = (props) => {
   };
 
   const posterUrl = buildImageUrl(configuration, data.poster_path, 2);
-
-  let legend = <p>{overview}</p>;
+  const description =
+    typeof data.overview !== 'undefined' && data.overview.length === 0
+      ? 'N/A'
+      : data.overview;
   let style = {};
-  let overview = data.overview.length === 0 ? 'N/A' : data.overview;
+  let overview = <p>{description}</p>;
   let year = 'N/A';
   let genresText = null;
 
-  if (data.overview.length > 200) {
-    overview = `${data.overview.substring(0, 200)}...`;
+  if (typeof data.overview !== 'undefined' && data.overview.length > 200) {
+    overview = <p>`${data.overview.substring(0, 200)}...`</p>;
   }
 
-  if (data.release_date.length > 0) {
+  if (
+    typeof data.release_date !== 'undefined' &&
+    data.release_date.length > 0
+  ) {
     year = new Date(data.release_date).getFullYear();
   }
 
@@ -48,7 +53,10 @@ export const Movie = (props) => {
     const backgroundImage = buildImageUrl(configuration, data.poster_path, 5);
     let dateString = 'N/A';
 
-    if (data.release_date.length > 0) {
+    if (
+      typeof data.release_date !== 'undefined' &&
+      data.release_date.length > 0
+    ) {
       const releaseDate = new Date(data.release_date);
       const date = releaseDate.getDate();
       const month = releaseDate.getMonth() + 1;
@@ -56,7 +64,7 @@ export const Movie = (props) => {
       dateString = `${date}/${month}/${year}`;
     }
 
-    legend = (
+    overview = (
       <>
         <h3>Release date</h3>
         <p>{dateString}</p>
@@ -88,7 +96,7 @@ export const Movie = (props) => {
               <h2>
                 {data.title} ({year})
               </h2>
-              {legend}
+              {overview}
             </div>
             <div className="movie__wrapper__footer">
               <div>
