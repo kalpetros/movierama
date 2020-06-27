@@ -21,6 +21,11 @@ test('Pass empty path', () => {
   expect(imageUrl).toBeNull();
 });
 
+test('Pass null path', () => {
+  const imageUrl = buildImageUrl(configuration, null, 2);
+  expect(imageUrl).toBeNull();
+});
+
 test('Pass incorrect size', () => {
   const imageUrl = buildImageUrl(configuration, path, 5);
   expect(imageUrl).toBeNull();

@@ -1,9 +1,10 @@
 export const buildImageUrl = (configuration, path, size) => {
+  console.log(configuration, path, size);
   if (Object.keys(configuration).length === 0) {
     return null;
   }
 
-  if (path.length === 0) {
+  if (path === null || path.length === 0) {
     return null;
   }
 
