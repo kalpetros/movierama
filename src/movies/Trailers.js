@@ -35,6 +35,7 @@ export const Trailers = (props) => {
 
   return <div className="movie__details__trailers">{trailers}</div>;
 };
+
 Trailers.propTypes = {
   id: PropTypes.number.isRequired,
 };
