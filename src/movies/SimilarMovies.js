@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 
 import { ConfigurationContext } from '../store/ConfigurationContext';
+import { buildImageUrl } from '../utils';
 
 export const SimilarMovies = (props) => {
   const [data, setData] = useState([]);
@@ -31,20 +32,8 @@ export const SimilarMovies = (props) => {
     fetchSimilarMovies();
   }, [id]);
 
-  const buildImageUrl = (path, size) => {
-    const baseUrl = configuration.secure_base_url;
-    const posterSize = configuration.poster_sizes[size];
-    let imageUrl = null;
-
-    if (path) {
-      imageUrl = `${baseUrl}${posterSize}${path}`;
-    }
-
-    return imageUrl;
-  };
-
   const list = data.map((movie, index) => {
-    const imageUrl = buildImageUrl(movie.poster_path, 2);
+    const imageUrl = buildImageUrl(configuration, movie.poster_path, 2);
 
     return (
       <a key={`similar-movie-${index}`} className="movie__details__image">

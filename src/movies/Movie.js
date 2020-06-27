@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { ConfigurationContext } from '../store/ConfigurationContext';
 import { Details } from './Details';
 import { GenreContext } from '../store/GenreContext';
+import { buildImageUrl } from '../utils';
 
 export const Movie = (props) => {
   const [isSelected, setIsSelected] = useState(false);
@@ -17,18 +18,6 @@ export const Movie = (props) => {
     element.scrollIntoView({ behavior: 'smooth' });
   };
 
-  const buildImageUrl = (path, size) => {
-    const baseUrl = configuration.secure_base_url;
-    const posterSize = configuration.poster_sizes[size];
-    let imageUrl = null;
-
-    if (path) {
-      imageUrl = `${baseUrl}${posterSize}${path}`;
-    }
-
-    return imageUrl;
-  };
-
   let style = {};
   let overview = data.overview.length === 0 ? 'N/A' : data.overview;
 
@@ -37,7 +26,7 @@ export const Movie = (props) => {
   }
 
   let legend = <p>{overview}</p>;
-  const imageUrl = buildImageUrl(data.poster_path, 2);
+  const posterUrl = buildImageUrl(configuration, data.poster_path, 2);
   const year = new Date(data.release_date).getFullYear();
 
   let genresText = null;
@@ -57,7 +46,7 @@ export const Movie = (props) => {
     const month = releaseDate.getMonth() + 1;
     const year = releaseDate.getFullYear();
     const dateString = `${date}/${month}/${year}`;
-    const imageUrl = buildImageUrl(data.poster_path, 5);
+    const backgroundImage = buildImageUrl(configuration, data.poster_path, 5);
 
     legend = (
       <>
@@ -69,7 +58,7 @@ export const Movie = (props) => {
     genresText = `Popularity - ${popularity}`;
 
     style = {
-      backgroundImage: `url(${imageUrl})`,
+      backgroundImage: `url(${backgroundImage})`,
       backgroundRepeat: 'no-repeat',
       backgroundSize: 'cover',
     };
@@ -84,7 +73,7 @@ export const Movie = (props) => {
       >
         <div className="movie__wrapper__content">
           <div className="movie__wrapper__image">
-            <img src={imageUrl} alt="movie_poster" />
+            <img src={posterUrl} alt="movie_poster" />
           </div>
           <div className="movie__wrapper__body">
             <div className="movie__wrapper__meta">
