@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Layout /> should match the snapshot 1`] = `"<main class=\\"layout\\"><section><p>Test</p></section></main>"`;
