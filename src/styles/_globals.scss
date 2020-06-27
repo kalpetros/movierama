@@ -68,5 +68,9 @@ p {
 }
 
 .button-icon {
+  color: theme.$grey;
   cursor: pointer;
+  &:hover {
+    color: theme.$red;
+  }
 }

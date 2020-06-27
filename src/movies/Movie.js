@@ -29,7 +29,7 @@ export const Movie = (props) => {
   let genresText = null;
 
   if (typeof data.overview !== 'undefined' && data.overview.length > 200) {
-    overview = <p>`${data.overview.substring(0, 200)}...`</p>;
+    overview = <p>{`${data.overview.substring(0, 200)}...`}</p>;
   }
 
   if (

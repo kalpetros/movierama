@@ -37,7 +37,6 @@ export const TrailerModal = (props) => {
       <FontAwesomeIcon
         icon={faYoutube}
         size="2x"
-        color="red"
         className="button-icon"
         onClick={handleClick}
       />
