@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Details /> should match the snapshot 1`] = `"<div class=\\"movie__details movie__details--inactive\\"><div class=\\"movie__details__menu\\"><ul><li data-id=\\"overview\\" class=\\"movie__details__menu--selected\\">Overview</li><li data-id=\\"reviews\\">Reviews</li><li data-id=\\"similar\\">Similar Movies</li></ul></div></div>"`;

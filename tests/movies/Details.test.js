@@ -1,11 +1,31 @@
 import React from 'react';
-import { shallow, configure } from 'enzyme';
+import { configure, render, shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 
 configure({ adapter: new Adapter() });
 
-import { SimilarMovies } from '../../src/movies/SimilarMovies';
+import { Details } from '../../src/movies/Details';
 
-test('test', () => {
-  const wrapper = shallow(<SimilarMovies />);
+describe('<Details />', () => {
+  let wrapper;
+
+  beforeEach(() => {
+    wrapper = shallow(<Details />);
+  });
+
+  it('should match the snapshot', () => {
+    expect(wrapper.html()).toMatchSnapshot();
+  });
+
+  it('should change class on menu item click', () => {
+    let li = wrapper.find('.movie__details__menu').find('ul').childAt(1);
+    const event = {
+      currentTarget: {
+        dataset: { id: 'reviews' },
+      },
+    };
+    li.simulate('click', event);
+    li = wrapper.find('.movie__details__menu').find('ul').childAt(1);
+    expect(li.props().className).toBe('movie__details__menu--selected');
+  });
 });
