@@ -38,7 +38,7 @@
   },
   "jest": {
     "moduleNameMapper": {
-      "\\.(jpg|jpeg|png|svg)$": "identity-obj-proxy"
+      "\\.(jpg|jpeg|png|ttf)$": "<rootDir>/tests/__mocks__/fileMock.js"
     }
   }
 }
