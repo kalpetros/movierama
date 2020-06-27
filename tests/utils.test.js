@@ -16,8 +16,18 @@ test('Pass empty configuration', () => {
   expect(imageUrl).toBeNull();
 });
 
+test('Pass undefined configuration', () => {
+  const imageUrl = buildImageUrl(undefined, path, 2);
+  expect(imageUrl).toBeNull();
+});
+
 test('Pass empty path', () => {
   const imageUrl = buildImageUrl(configuration, '', 2);
+  expect(imageUrl).toBeNull();
+});
+
+test('Pass undefined path', () => {
+  const imageUrl = buildImageUrl(configuration, undefined, 2);
   expect(imageUrl).toBeNull();
 });
 
