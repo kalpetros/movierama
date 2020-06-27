@@ -36,6 +36,10 @@ export const Trailers = (props) => {
   return <div className="movie__details__trailers">{trailers}</div>;
 };
 
+Trailers.defaultProps = {
+  id: 1,
+};
+
 Trailers.propTypes = {
   id: PropTypes.number.isRequired,
 };

@@ -18,7 +18,7 @@ describe('<TrailerModal />', () => {
   useStateSpy.mockImplementation((init) => [init, setState]);
 
   beforeEach(() => {
-    wrapper = shallow(<TrailerModal id="1" />);
+    wrapper = shallow(<TrailerModal />);
   });
 
   afterEach(() => {

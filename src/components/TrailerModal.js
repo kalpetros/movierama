@@ -45,6 +45,10 @@ export const TrailerModal = (props) => {
   );
 };
 
+TrailerModal.defaultProps = {
+  id: '1',
+};
+
 TrailerModal.propTypes = {
   id: PropTypes.string.isRequired,
 };

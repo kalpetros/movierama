@@ -10,7 +10,7 @@ describe('<Trailers />', () => {
   let wrapper;
 
   beforeEach(() => {
-    wrapper = shallow(<Trailers id={1} />);
+    wrapper = shallow(<Trailers />);
   });
 
   it('should match the snapshot', () => {
