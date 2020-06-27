@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Header /> should match the snapshot 1`] = `"<header class=\\"header\\"><div class=\\"header__content\\"><div><div><h1>Welcome</h1></div><div><input type=\\"text\\" class=\\"input\\" placeholder=\\"Type here to search for your favorite movie...\\" value=\\"Test\\"></div></div></div><div class=\\"header__title\\"><div><h1>Movies \\"Test\\"</h1></div></div></header>"`;
