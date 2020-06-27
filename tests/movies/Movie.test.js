@@ -1,12 +1,12 @@
 import React from 'react';
-import { configure, shallow, mount } from 'enzyme';
+import { configure, mount } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 
 configure({ adapter: new Adapter() });
 
-import { Movie } from '../../src/movies/Movie';
 import { ConfigurationContext } from '../../src/store/ConfigurationContext';
 import { GenreContext } from '../../src/store/GenreContext';
+import { Movie } from '../../src/movies/Movie';
 
 describe('<Movies />', () => {
   let wrapper;

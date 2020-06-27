@@ -1,8 +1,8 @@
 import React, { useContext, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 
-import { ConfigurationContext } from '../store/ConfigurationContext';
 import { buildImageUrl } from '../utils';
+import { ConfigurationContext } from '../store/ConfigurationContext';
 
 export const SimilarMovies = (props) => {
   const [data, setData] = useState([]);

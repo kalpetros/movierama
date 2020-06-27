@@ -1,10 +1,10 @@
 import React, { useContext, useState } from 'react';
 import PropTypes from 'prop-types';
 
+import { buildImageUrl } from '../utils';
 import { ConfigurationContext } from '../store/ConfigurationContext';
 import { Details } from './Details';
 import { GenreContext } from '../store/GenreContext';
-import { buildImageUrl } from '../utils';
 
 export const Movie = (props) => {
   const [isSelected, setIsSelected] = useState(false);

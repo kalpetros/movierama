@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
+
 import { TrailerModal } from '../components/TrailerModal';
 
 export const Trailers = (props) => {
