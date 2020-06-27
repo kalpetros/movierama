@@ -14,7 +14,7 @@ export const Movie = (props) => {
   const handleClick = (e) => {
     setIsSelected((p) => (p ? false : true));
     const element = document.getElementById(`movie-${data.id}`);
-    element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    element.scrollIntoView({ behavior: 'smooth' });
   };
 
   const buildImageUrl = (path, size) => {
