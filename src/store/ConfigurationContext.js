@@ -1,4 +1,5 @@
 import React, { createContext, useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
 
 export const ConfigurationContext = createContext({});
 
@@ -33,4 +34,8 @@ export const ConfigurationStateProvider = ({ children }) => {
       {children}
     </ConfigurationContext.Provider>
   );
+};
+
+ConfigurationStateProvider.propTypes = {
+  children: PropTypes.node.isRequired,
 };

@@ -6,27 +6,27 @@ export const Overview = (props) => {
   const { id: id } = props;
 
   useEffect(() => {
+    const fetchDetails = () => {
+      const apiKey = 'bc50218d91157b1ba4f142ef7baaa6a0';
+      const endpoint = `https://api.themoviedb.org/3/movie/${id}?api_key=${apiKey}`;
+
+      fetch(endpoint, {
+        method: 'GET',
+      })
+        .then((response) => {
+          if (response.status !== 200) throw new Error(response.status);
+          return response.json();
+        })
+        .then((data) => {
+          setData(data);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    };
+
     fetchDetails();
-  }, []);
-
-  const fetchDetails = () => {
-    const apiKey = 'bc50218d91157b1ba4f142ef7baaa6a0';
-    const endpoint = `https://api.themoviedb.org/3/movie/${id}?api_key=${apiKey}`;
-
-    fetch(endpoint, {
-      method: 'GET',
-    })
-      .then((response) => {
-        if (response.status !== 200) throw new Error(response.status);
-        return response.json();
-      })
-      .then((data) => {
-        setData(data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
+  }, [id]);
 
   if (Object.keys(data).length === 0) {
     return null;

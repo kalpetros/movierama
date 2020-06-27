@@ -5,6 +5,7 @@ import React, {
   useRef,
   useState,
 } from 'react';
+import PropTypes from 'prop-types';
 
 import { ConfigurationContext } from './ConfigurationContext';
 
@@ -105,4 +106,8 @@ export const MoviesStateProvider = ({ children }) => {
       {children}
     </MoviesContext.Provider>
   );
+};
+
+MoviesStateProvider.propTypes = {
+  children: PropTypes.node.isRequired,
 };

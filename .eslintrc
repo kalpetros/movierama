@@ -1,6 +1,6 @@
 {
   "env": {
-    "browser": "true",
+    "browser": true,
     "es2020": true
   },
   "extends": [
@@ -20,5 +20,9 @@
     "react": {
       "version": "detect"
     }
+  },
+  "rules": {
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "warn"
   }
 }
