@@ -38,7 +38,6 @@ export const Overview = (props) => {
   const genres = data.genres.map((genre, index) => {
     return genre.name;
   });
-  const video = data.video;
   const genresText = genres.join(', ');
 
   const producers = data.production_companies.map((company, index) => {
