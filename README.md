@@ -2,7 +2,11 @@
 
 ## Getting started
 
-To run MovieRama type
+### To run MovieRama
+
+use the generated **index.html** file located in the **/dist** folder.
+
+or run
 
 ```
 $ yarn develop
@@ -10,28 +14,29 @@ $ yarn develop
 
 and visit **http://localhost:1234**
 
-or use the generated **index.html** file located in the **/dist** folder.
-
-To run a production build type:
+### To run a production build type:
 
 ```
 $ yarn build
 ```
 
-Run tests:
+### Run tests:
 
 ```
 $ yarn test
 ```
 
-To run code formatting type:
+### To run code formatting type:
 
 ```
 $ yarn format
 ```
 
-For linting type:
+### For linting type:
 
 ```
 $ yarn lint
 ```
+
+> In order to run the above yarn commands you need to install
+> the necessary modules first by running `$ yarn`

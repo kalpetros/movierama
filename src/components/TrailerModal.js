@@ -19,8 +19,6 @@ export const TrailerModal = (props) => {
       <div className="modal-wrapper" onClick={handleClick}>
         <div className="modal">
           <iframe
-            width="1280"
-            height="720"
             src={`https://www.youtube.com/embed/${id}`}
             frameBorder="0"
             allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
