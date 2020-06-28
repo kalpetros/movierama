@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 
 import { MoviesContext } from '../store/MoviesContext';
 
-function useDebounce(value, delay) {
+function useDebounce(value, delay = 500) {
   const [debouncedValue, setDebouncedValue] = useState('');
 
   useEffect(() => {
@@ -21,7 +21,7 @@ function useDebounce(value, delay) {
 export const Header = () => {
   const [value, setValue] = useState('');
   const { query, setQuery } = useContext(MoviesContext);
-  const debouncedValue = useDebounce(value, 500);
+  const debouncedValue = useDebounce(value);
 
   useEffect(() => {
     setQuery(debouncedValue);
