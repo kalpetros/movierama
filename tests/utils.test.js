@@ -14,31 +14,31 @@ describe('buildImageUrl', () => {
 
   it('should return correctly given an empty configuration', () => {
     const imageUrl = buildImageUrl({}, path, 2);
-    expect(imageUrl).toBeDefined();
+    expect(imageUrl).toBe('file-mock');
   });
 
   it('should return correctly given an undefined configuration', () => {
     const imageUrl = buildImageUrl(undefined, path, 2);
-    expect(imageUrl).toBeDefined();
+    expect(imageUrl).toBe('file-mock');
   });
 
   it('should return correctly given an empty path', () => {
     const imageUrl = buildImageUrl(configuration, '', 2);
-    expect(imageUrl).toBeDefined();
+    expect(imageUrl).toBe('file-mock');
   });
 
   it('should return correctly given an undefined path', () => {
     const imageUrl = buildImageUrl(configuration, undefined, 2);
-    expect(imageUrl).toBeDefined();
+    expect(imageUrl).toBe('file-mock');
   });
 
   it('should return correctly given a null path', () => {
     const imageUrl = buildImageUrl(configuration, null, 2);
-    expect(imageUrl).toBeDefined();
+    expect(imageUrl).toBe('file-mock');
   });
 
   it('should return correctly given a size that does not exist', () => {
     const imageUrl = buildImageUrl(configuration, path, 5);
-    expect(imageUrl).toBeDefined();
+    expect(imageUrl).toBe('file-mock');
   });
 });
