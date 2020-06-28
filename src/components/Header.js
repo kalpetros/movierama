@@ -1,12 +1,34 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 
 import { MoviesContext } from '../store/MoviesContext';
 
+function useDebounce(value, delay) {
+  const [debouncedValue, setDebouncedValue] = useState('');
+
+  useEffect(() => {
+    const handler = setTimeout(() => {
+      setDebouncedValue(value);
+    }, delay);
+
+    return () => {
+      clearTimeout(handler);
+    };
+  }, [delay, value]);
+
+  return debouncedValue;
+}
+
 export const Header = () => {
+  const [value, setValue] = useState('');
   const { query, setQuery } = useContext(MoviesContext);
+  const debouncedValue = useDebounce(value, 500);
+
+  useEffect(() => {
+    setQuery(debouncedValue);
+  }, [debouncedValue, setQuery]);
 
   const handleChange = (e) => {
-    setQuery(e.currentTarget.value);
+    setValue(e.currentTarget.value);
   };
 
   let title = 'In Theaters';
@@ -24,7 +46,7 @@ export const Header = () => {
           <div>
             <input
               type="text"
-              value={query}
+              value={value}
               className="input"
               placeholder="Type here to search for your favorite movie..."
               onChange={handleChange}
