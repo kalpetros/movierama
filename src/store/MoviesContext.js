@@ -6,8 +6,9 @@ export const MoviesContext = createContext([]);
 const buildEndpoint = (query, page) => {
   const apiKey = 'bc50218d91157b1ba4f142ef7baaa6a0';
   const baseEndpoint = 'https://api.themoviedb.org/3/';
-  const nowPlayingEndpoint = `${baseEndpoint}movie/now_playing?api_key=${apiKey}&language=en-US&page=`;
-  const searchMovieEndpoint = `${baseEndpoint}search/movie?api_key=${apiKey}&language=en-US&page=`;
+  const language = '&language=en-US';
+  const nowPlayingEndpoint = `${baseEndpoint}movie/now_playing?api_key=${apiKey}${language}&page=`;
+  const searchMovieEndpoint = `${baseEndpoint}search/movie?api_key=${apiKey}${language}&page=`;
 
   let endpoint = `${nowPlayingEndpoint}${page}`;
 
@@ -20,14 +21,14 @@ const buildEndpoint = (query, page) => {
 
 export const MoviesStateProvider = ({ children }) => {
   const [data, setData] = useState({
+    init: true,
+    page: 1,
     pages: 0,
     results: [],
   });
-  const [page, setPage] = useState(1);
   const [query, setQuery] = useState('');
+  const page = useRef(1);
   const pages = useRef(0);
-  const pageRef = useRef(page);
-  const endpoint = buildEndpoint(query, page);
   const movies = data.results;
 
   useEffect(() => {
@@ -39,37 +40,29 @@ export const MoviesStateProvider = ({ children }) => {
   }, []);
 
   useEffect(() => {
-    fetchMovies();
-  }, []);
+    if (data.init && data.results.length === 0) {
+      fetchMovies();
+    }
+  }, [data]);
+
+  useEffect(() => {
+    if (!data.init) {
+      fetchMovies();
+    }
+  }, [page.current]);
 
   // Perform a cleanup after each new query
   useEffect(() => {
-    if (query.length > 0) {
+    if (!data.init) {
+      page.current = 1;
       setData({
+        init: true,
+        page: 1,
         pages: 0,
         results: [],
       });
-    } else {
-      if (movies.length > 0) {
-        setData({
-          pages: 0,
-          results: [],
-        });
-      }
     }
   }, [query]);
-
-  useEffect(() => {
-    if (movies.length === 0) {
-      fetchMovies();
-    }
-  }, [movies]);
-
-  useEffect(() => {
-    if (totalPages > 0) {
-      fetchMovies();
-    }
-  }, [page]);
 
   const scrollEvent = () => {
     const offsetHeight = document.body.offsetHeight;
@@ -77,14 +70,19 @@ export const MoviesStateProvider = ({ children }) => {
     const scrollY = window.scrollY;
 
     if (innerHeight + scrollY === offsetHeight) {
-      if (pageRef.current < pages.current) {
-        pageRef.current = pageRef.current + 1;
-        setPage(pageRef.current);
+      if (page.current < pages.current) {
+        page.current = page.current + 1;
+        setData((state) => {
+          const newState = Object.assign({}, state);
+          newState.page = page.current;
+          return newState;
+        });
       }
     }
   };
 
   const fetchMovies = () => {
+    const endpoint = buildEndpoint(query, data.page);
     fetch(endpoint, {
       method: 'GET',
     })
@@ -95,6 +93,8 @@ export const MoviesStateProvider = ({ children }) => {
       .then((newData) => {
         pages.current = newData.total_pages;
         setData({
+          init: false,
+          page: data.page,
           pages: newData.total_pages,
           results: [...data.results, ...newData.results],
         });
