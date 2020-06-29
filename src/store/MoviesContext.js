@@ -39,10 +39,8 @@ export const MoviesStateProvider = ({ children }) => {
   }, []);
 
   useEffect(() => {
-    if (Object.keys(configuration).length > 0) {
-      fetchMovies();
-    }
-  }, [configuration]);
+    fetchMovies();
+  }, []);
 
   // Perform a cleanup after each new query
   useEffect(() => {
@@ -62,10 +60,8 @@ export const MoviesStateProvider = ({ children }) => {
   }, [query]);
 
   useEffect(() => {
-    if (Object.keys(configuration).length > 0) {
-      if (movies.length === 0) {
-        fetchMovies();
-      }
+    if (movies.length === 0) {
+      fetchMovies();
     }
   }, [movies]);
 
