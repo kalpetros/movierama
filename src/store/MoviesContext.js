@@ -1,29 +1,34 @@
-import React, {
-  createContext,
-  useContext,
-  useEffect,
-  useRef,
-  useState,
-} from 'react';
+import React, { createContext, useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
-
-import { ConfigurationContext } from './ConfigurationContext';
 
 export const MoviesContext = createContext([]);
 
-export const MoviesStateProvider = ({ children }) => {
-  const [movies, setMovies] = useState([]);
-  const [totalPages, setTotalPages] = useState(0);
-  const [page, setPage] = useState(1);
-  const [query, setQuery] = useState('');
-  const { state: configuration } = useContext(ConfigurationContext);
-  const totalPagesRef = useRef(totalPages);
-  const pageRef = useRef(page);
-
+const buildEndpoint = (query, page) => {
   const apiKey = 'bc50218d91157b1ba4f142ef7baaa6a0';
   const baseEndpoint = 'https://api.themoviedb.org/3/';
   const nowPlayingEndpoint = `${baseEndpoint}movie/now_playing?api_key=${apiKey}&language=en-US&page=`;
   const searchMovieEndpoint = `${baseEndpoint}search/movie?api_key=${apiKey}&language=en-US&page=`;
+
+  let endpoint = `${nowPlayingEndpoint}${page}`;
+
+  if (query.length > 0) {
+    endpoint = `${searchMovieEndpoint}${page}&query=${query}`;
+  }
+
+  return endpoint;
+};
+
+export const MoviesStateProvider = ({ children }) => {
+  const [data, setData] = useState({
+    pages: 0,
+    results: [],
+  });
+  const [page, setPage] = useState(1);
+  const [query, setQuery] = useState('');
+  const pages = useRef(0);
+  const pageRef = useRef(page);
+  const endpoint = buildEndpoint(query, page);
+  const movies = data.results;
 
   useEffect(() => {
     window.addEventListener('scroll', scrollEvent);
@@ -42,10 +47,16 @@ export const MoviesStateProvider = ({ children }) => {
   // Perform a cleanup after each new query
   useEffect(() => {
     if (query.length > 0) {
-      setMovies([]);
+      setData({
+        pages: 0,
+        results: [],
+      });
     } else {
       if (movies.length > 0) {
-        setMovies([]);
+        setData({
+          pages: 0,
+          results: [],
+        });
       }
     }
   }, [query]);
@@ -70,7 +81,7 @@ export const MoviesStateProvider = ({ children }) => {
     const scrollY = window.scrollY;
 
     if (innerHeight + scrollY === offsetHeight) {
-      if (pageRef.current < totalPagesRef.current) {
+      if (pageRef.current < pages.current) {
         pageRef.current = pageRef.current + 1;
         setPage(pageRef.current);
       }
@@ -78,12 +89,6 @@ export const MoviesStateProvider = ({ children }) => {
   };
 
   const fetchMovies = () => {
-    let endpoint = `${nowPlayingEndpoint}${page}`;
-
-    if (query.length > 0) {
-      endpoint = `${searchMovieEndpoint}${page}&query=${query}`;
-    }
-
     fetch(endpoint, {
       method: 'GET',
     })
@@ -91,10 +96,12 @@ export const MoviesStateProvider = ({ children }) => {
         if (response.status !== 200) throw new Error(response.status);
         return response.json();
       })
-      .then((data) => {
-        totalPagesRef.current = data.total_pages;
-        setTotalPages(data.total_pages);
-        setMovies([...movies, ...data.results]);
+      .then((newData) => {
+        pages.current = newData.total_pages;
+        setData({
+          pages: newData.total_pages,
+          results: [...data.results, ...newData.results],
+        });
       })
       .catch((error) => {
         console.log(error);

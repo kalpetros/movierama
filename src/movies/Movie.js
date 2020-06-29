@@ -12,6 +12,10 @@ export const Movie = (props) => {
   const { state: genres } = useContext(GenreContext);
   const { data: data } = props;
 
+  if (Object.keys(configuration).length == 0 || genres.length == 0) {
+    return null;
+  }
+
   const handleClick = (e) => {
     setIsSelected((p) => (p ? false : true));
     const element = document.getElementById(`movie-${data.id}`);
