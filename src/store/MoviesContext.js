@@ -19,6 +19,27 @@ const buildEndpoint = (query, page) => {
   return endpoint;
 };
 
+const fetchMovies = (prevData, endpoint, callback) => {
+  fetch(endpoint, {
+    method: 'GET',
+  })
+    .then((response) => {
+      if (response.status !== 200) throw new Error(response.status);
+      return response.json();
+    })
+    .then((newData) => {
+      callback({
+        init: false,
+        page: prevData.page,
+        pages: newData.total_pages,
+        results: [...prevData.results, ...newData.results],
+      });
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+};
+
 export const MoviesStateProvider = ({ children }) => {
   const [data, setData] = useState({
     init: true,
@@ -29,7 +50,9 @@ export const MoviesStateProvider = ({ children }) => {
   const [query, setQuery] = useState('');
   const page = useRef(1);
   const pages = useRef(0);
+  pages.current = data.pages;
   const movies = data.results;
+  const endpoint = buildEndpoint(query, data.page);
 
   useEffect(() => {
     window.addEventListener('scroll', scrollEvent);
@@ -41,13 +64,13 @@ export const MoviesStateProvider = ({ children }) => {
 
   useEffect(() => {
     if (data.init && data.results.length === 0) {
-      fetchMovies();
+      fetchMovies(data, endpoint, setData);
     }
   }, [data]);
 
   useEffect(() => {
     if (!data.init) {
-      fetchMovies();
+      fetchMovies(data, endpoint, setData);
     }
   }, [page.current]);
 
@@ -79,29 +102,6 @@ export const MoviesStateProvider = ({ children }) => {
         });
       }
     }
-  };
-
-  const fetchMovies = () => {
-    const endpoint = buildEndpoint(query, data.page);
-    fetch(endpoint, {
-      method: 'GET',
-    })
-      .then((response) => {
-        if (response.status !== 200) throw new Error(response.status);
-        return response.json();
-      })
-      .then((newData) => {
-        pages.current = newData.total_pages;
-        setData({
-          init: false,
-          page: data.page,
-          pages: newData.total_pages,
-          results: [...data.results, ...newData.results],
-        });
-      })
-      .catch((error) => {
-        console.log(error);
-      });
   };
 
   return (
