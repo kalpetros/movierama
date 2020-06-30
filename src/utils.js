@@ -32,11 +32,11 @@ export const buildEndpoint = (value, options) => {
 
   if (expectedOptions[value]) {
     const passedOptions = Object.keys(options);
-    const valid = expectedOptions[value].every((option) =>
+    const areValid = expectedOptions[value].every((option) =>
       passedOptions.includes(option)
     );
 
-    if (!valid)
+    if (!areValid)
       throw new Error(
         `Endpoint ${value} should have the followng options [${expectedOptions[
           value
