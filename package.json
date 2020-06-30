@@ -3,8 +3,7 @@
   "version": "0.0.1",
   "description": "The mdb movie catalog",
   "private": true,
-  "author": "Petros Kalogiannakis <github@petroskal.com>",
-  "license": "MIT",
+  "author": "Petros Kalogiannakis <petroskal.com>",
   "scripts": {
     "build": "parcel build src/index.html",
     "develop": "parcel src/index.html",
