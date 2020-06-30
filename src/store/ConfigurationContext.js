@@ -1,19 +1,15 @@
 import React, { createContext, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 
+import { buildEndpoint } from '../utils';
+
 export const ConfigurationContext = createContext({});
 
 export const ConfigurationStateProvider = ({ children }) => {
   const [state, setState] = useState({});
+  const endpoint = buildEndpoint('configuration');
 
   useEffect(() => {
-    fetchData();
-  }, []);
-
-  const fetchData = () => {
-    const apiKey = 'bc50218d91157b1ba4f142ef7baaa6a0';
-    const endpoint = `https://api.themoviedb.org/3/configuration?api_key=${apiKey}`;
-
     fetch(endpoint, {
       method: 'GET',
     })
@@ -27,7 +23,7 @@ export const ConfigurationStateProvider = ({ children }) => {
       .catch((error) => {
         console.log(error);
       });
-  };
+  }, [endpoint]);
 
   return (
     <ConfigurationContext.Provider value={{ state }}>

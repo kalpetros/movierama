@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 
-import { MoviesContext } from '../store/movies/context';
+import { MoviesContext } from '../store/MoviesContext';
 import { Movie } from './Movie';
 
 export const Movies = () => {

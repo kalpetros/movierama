@@ -1,32 +1,28 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 
+import { buildEndpoint } from '../utils';
+
 export const Reviews = (props) => {
   const [data, setData] = useState([]);
   const { id: id } = props;
+  const endpoint = buildEndpoint('reviews', { id: id });
 
   useEffect(() => {
-    const fetchReviews = () => {
-      const apiKey = 'bc50218d91157b1ba4f142ef7baaa6a0';
-      const endpoint = `https://api.themoviedb.org/3/movie/${id}/reviews?api_key=${apiKey}`;
-
-      fetch(endpoint, {
-        method: 'GET',
+    fetch(endpoint, {
+      method: 'GET',
+    })
+      .then((response) => {
+        if (response.status !== 200) throw new Error(response.status);
+        return response.json();
       })
-        .then((response) => {
-          if (response.status !== 200) throw new Error(response.status);
-          return response.json();
-        })
-        .then((data) => {
-          setData(data.results);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    };
-
-    fetchReviews();
-  }, [id]);
+      .then((data) => {
+        setData(data.results);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, [endpoint]);
 
   const list = data.slice(0, 2).map((review, index) => {
     const author = review.author;

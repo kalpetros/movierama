@@ -1,19 +1,15 @@
 import React, { createContext, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 
+import { buildEndpoint } from '../utils';
+
 export const GenreContext = createContext([]);
 
 export const GenreStateProvider = ({ children }) => {
   const [state, setState] = useState([]);
+  const endpoint = buildEndpoint('genres');
 
   useEffect(() => {
-    fetchData();
-  }, []);
-
-  const fetchData = () => {
-    const apiKey = 'bc50218d91157b1ba4f142ef7baaa6a0';
-    const endpoint = `https://api.themoviedb.org/3/genre/movie/list?api_key=${apiKey}`;
-
     fetch(endpoint, {
       method: 'GET',
     })
@@ -27,7 +23,7 @@ export const GenreStateProvider = ({ children }) => {
       .catch((error) => {
         console.log(error);
       });
-  };
+  }, [endpoint]);
 
   return (
     <GenreContext.Provider value={{ state }}>{children}</GenreContext.Provider>

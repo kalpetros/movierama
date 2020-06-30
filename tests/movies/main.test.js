@@ -5,7 +5,7 @@ import Adapter from 'enzyme-adapter-react-16';
 configure({ adapter: new Adapter() });
 
 import { Movies } from '../../src/movies/main';
-import { MoviesContext } from '../../src/store/movies/context';
+import { MoviesContext } from '../../src/store/MoviesContext';
 
 describe('<Movies />', () => {
   let wrapper;

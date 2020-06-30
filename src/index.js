@@ -9,7 +9,7 @@ import { GenreStateProvider } from './store/GenreContext';
 import { Header } from './components/Header';
 import { Layout } from './components/Layout';
 import { Movies } from './movies/main';
-import { MoviesStateProvider } from './store/movies/context';
+import { MoviesStateProvider } from './store/MoviesContext';
 
 const App = () => {
   return (

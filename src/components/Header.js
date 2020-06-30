@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 
-import { MoviesContext } from '../store/movies/context';
+import { MoviesContext } from '../store/MoviesContext';
 
 function useDebounce(value, delay = 500) {
   const [debouncedValue, setDebouncedValue] = useState('');

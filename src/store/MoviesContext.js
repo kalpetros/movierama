@@ -1,10 +1,30 @@
 import React, { createContext, useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 
-import { buildEndpoint } from './utils';
-import { fetchMovies } from './utils';
+import { buildEndpoint } from '../utils';
 
 export const MoviesContext = createContext([]);
+
+const fetchMovies = (prevData, endpoint, callback) => {
+  fetch(endpoint, {
+    method: 'GET',
+  })
+    .then((response) => {
+      if (response.status !== 200) throw new Error(response.status);
+      return response.json();
+    })
+    .then((newData) => {
+      callback({
+        init: false,
+        page: prevData.page,
+        pages: newData.total_pages,
+        results: [...prevData.results, ...newData.results],
+      });
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+};
 
 export const MoviesStateProvider = ({ children }) => {
   const [data, setData] = useState({
@@ -18,7 +38,11 @@ export const MoviesStateProvider = ({ children }) => {
   const pages = useRef(0);
   pages.current = data.pages;
   const movies = data.results;
-  const endpoint = buildEndpoint(query, data.page);
+
+  let endpoint = buildEndpoint('now_playing', { page: data.page });
+  if (query.length > 0) {
+    endpoint = buildEndpoint('search', { query: query, page: data.page });
+  }
 
   useEffect(() => {
     window.addEventListener('scroll', scrollEvent);
