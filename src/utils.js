@@ -1,5 +1,11 @@
 import defaultImage from '../src/assets/default.jpeg';
 
+/**
+ * Constructs an MDB image url
+ * @param {Object} configuration
+ * @param {string} path
+ * @param {number} size
+ */
 export const buildImageUrl = (configuration, path, size) => {
   let imageUrl;
 
@@ -20,6 +26,11 @@ export const buildImageUrl = (configuration, path, size) => {
   return imageUrl;
 };
 
+/**
+ * Constructs an MDB endpoint based on the passed value and options
+ * @param {string} value
+ * @param {Object} options
+ */
 export const buildEndpoint = (value, options) => {
   const expectedOptions = {
     now_playing: ['page'],
