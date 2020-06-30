@@ -4,7 +4,7 @@
 
 ### To run MovieRama
 
-use the generated **index.html** file located in the **/dist** folder.
+use the **index.html** file located in the **/dist** folder.
 
 or run
 
