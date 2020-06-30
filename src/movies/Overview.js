@@ -30,15 +30,15 @@ export const Overview = (props) => {
   }
 
   const overview = data.overview;
-  const genres = data.genres.map((genre, index) => {
+  const genres = data.genres.map((genre) => {
     return genre.name;
   });
   const genresText = genres.join(', ');
-  const producers = data.production_companies.map((company, index) => {
+  const producers = data.production_companies.map((company) => {
     return company.name;
   });
   const producersText = producers.length > 0 ? producers.join(', ') : 'N/A';
-  const countries = data.production_countries.map((country, index) => {
+  const countries = data.production_countries.map((country) => {
     return country.name;
   });
   const countriesText = countries.length > 0 ? countries.join(', ') : 'N/A';

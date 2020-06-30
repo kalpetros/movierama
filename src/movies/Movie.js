@@ -12,15 +12,15 @@ export const Movie = (props) => {
   const { state: genres } = useContext(GenreContext);
   const { data: data } = props;
 
-  if (Object.keys(configuration).length == 0 || genres.length == 0) {
-    return null;
-  }
-
   const handleClick = (e) => {
     setIsSelected((p) => (p ? false : true));
     const element = document.getElementById(`movie-${data.id}`);
     element.scrollIntoView({ behavior: 'smooth', block: 'center' });
   };
+
+  if (Object.keys(configuration).length == 0 || genres.length == 0) {
+    return null;
+  }
 
   const posterUrl = buildImageUrl(configuration, data.poster_path, 2);
   const description =
